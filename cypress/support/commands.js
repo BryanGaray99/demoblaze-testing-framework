@@ -23,3 +23,16 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('waitUntil', (element, visibility) => {
+    cy.get(element).then(($el) => {
+      let isVisible = true
+      const startTime = Date.now()
+      let endTime
+      do {
+        isVisible = Cypress.dom.isVisible($el)
+        endTime = Date.now()
+      }
+      while (!isVisible === visibility && (endTime - startTime) <= 3000)
+    })
+  })
+  

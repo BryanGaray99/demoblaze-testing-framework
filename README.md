@@ -1,0 +1,1 @@
+# Cypress testing framework with Allure Reports for Demoblaze site

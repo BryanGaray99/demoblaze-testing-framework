@@ -21,13 +21,14 @@ const homePageLocators = {
   usernameLabelSignUp: '#signInModal > .modal-dialog > .modal-content > .modal-body > form > :nth-child(1) > .form-control-label',
   passwordLabelSignUp: '#signInModal > .modal-dialog > .modal-content > .modal-body > form > :nth-child(2) > .form-control-label',
 
-  // Carousel
+  // Carousel 
   featuredItemCarousel: '.active > .d-block',
   prevItemCarousel: '.carousel-control-prev-icon',
   nextItemCarousel: '.carousel-control-next-icon',
   indicatorCarousel1: '[data-slide-to="0"]',
   indicatorCarousel2: '[data-slide-to="1"]',
   indicatorCarousel3: '[data-slide-to="2"]',
+  carouselItem: '.carousel-inner .carousel-item',
 
   // Categories
   categoriesTitle: '#cat',
@@ -49,14 +50,8 @@ const homePageLocators = {
   monitor2: ':nth-child(2) > .card > .card-block > .card-title > .hrefch'  
 }
 
-const urls = {
-  firstImageCarousel: 'https://www.demoblaze.com/Samsung1.jpg',
-  secondImageCarousel: 'https://www.demoblaze.com/nexus1.jpg',
-  thirdImageCarousel: 'https://www.demoblaze.com/iphone1.jpg'
-}
-
 class HomePage {
-  waitForHomePageSuccessfulResponse () {
+  waitForHomePage () {
     cy.intercept('/')
       .as('getHomeResponse')
     cy.visit('/')
@@ -99,24 +94,6 @@ class HomePage {
   indicatorCarousel1 () { return cy.get(homePageLocators.indicatorCarousel1) }
   indicatorCarousel2 () { return cy.get(homePageLocators.indicatorCarousel2) }
   indicatorCarousel3 () { return cy.get(homePageLocators.indicatorCarousel3) }
-
-  firstImageCarousel () {
-    return cy.request({
-      url: urls.firstImageCarousel, encoding: 'binary'
-    })
-  }
-
-  secondImageCarousel () {
-    return cy.request({
-      url: urls.secondImageCarousel, encoding: 'binary'
-    })
-  }
-
-  thirdImageCarousel () {
-    return cy.request({
-      url: urls.thirdImageCarousel, encoding: 'binary'
-    })
-  }
 
   // Get Categories
   categoriesTitle () { return cy.get(homePageLocators.categoriesTitle) }
@@ -180,6 +157,11 @@ class HomePage {
   visibilityIndicatorCarousel2 () { return this.indicatorCarousel2().should('be.visible') }
   clickIndicatorCarousel3 () { return this.indicatorCarousel3().click() }
   visibilityIndicatorCarousel3 () { return this.indicatorCarousel3().should('be.visible') }
+  isCarouselItemActive(index) {
+    return cy.get(homePageLocators.carouselItem)
+      .eq(index)
+      .should('have.class', 'active');
+  }
 
   // Categories Actions
   clickPhonesCategory () { return this.phonesCategory().click() }
