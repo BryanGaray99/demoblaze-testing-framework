@@ -6,9 +6,11 @@ const cartPageLocators = {
   cartItem1: '#tbodyid > :nth-child(1)',
   cartItem1DeleteBtn: '#tbodyid > :nth-child(1) > :nth-child(4) > a',
   cartItem2: '#tbodyid > :nth-child(2)',
-  cartItem2DeleteBtn: '#tbodyid > :nth-child(1) > :nth-child(4) > a',
+  cartItem2DeleteBtn: '#tbodyid > :nth-child(2) > :nth-child(4) > a',
   cartItem3: '#tbodyid > :nth-child(3)',
-  cartItem3DeleteBtn: '#tbodyid > :nth-child(1) > :nth-child(4) > a',
+  cartItem3DeleteBtn: '#tbodyid > :nth-child(3) > :nth-child(4) > a',
+  allCartItems: '#tbodyid > :nth-child(n)',
+  allDeleteBtns: '#tbodyid > :nth-child(n) > :nth-child(4) > a',
 
   // Place Order
   placeOrderButton: '.col-lg-1 > .btn',
@@ -28,7 +30,9 @@ const cartPageLocators = {
   purchaseButton: '#orderModal > .modal-dialog > .modal-content > .modal-footer > .btn-primary',
   
   // Confirm
-  confirmButton: '.confirm'
+  confirmButton: '.confirm',
+  confirmationMessage: '.sweet-alert > h2',
+  confirmationPurchaseInfo: '.lead'
 }
 
 class CartPage {
@@ -42,7 +46,9 @@ class CartPage {
   cartItem2DeleteBtn () { return cy.get(cartPageLocators.cartItem2DeleteBtn) }
   cartItem3 () { return cy.get(cartPageLocators.cartItem3) }
   cartItem3DeleteBtn () { return cy.get(cartPageLocators.cartItem3DeleteBtn) }
-  
+  allCartItems () { return cy.get(cartPageLocators.allCartItems) }
+  allDeleteBtns () { return cy.get(cartPageLocators.allDeleteBtns) }
+
   // Get Place Order
   placeOrderButton () { return cy.get(cartPageLocators.placeOrderButton) }
 
@@ -62,9 +68,11 @@ class CartPage {
 
   // Get Confirmation
   confirmButton () { return cy.get(cartPageLocators.confirmButton) }
+  confirmationMessage () { return cy.get(cartPageLocators.confirmationMessage) }
+  confirmationPurchaseInfo () { return cy.get(cartPageLocators.confirmationPurchaseInfo) }
 
   // Cart Actions
-  visibleProductsTitle() { return this.productsTitle().should('be.visible'); }
+  visbilityProductsTitle() { return this.productsTitle().should('be.visible'); }
   textProductsTitle() { return this.productsTitle().should('have.text', 'Products'); }
 
   // Cart Items Actions
@@ -77,13 +85,22 @@ class CartPage {
   visbilityCartItem3 () { return this.cartItem3().should('be.visible') }
   clickCartItem3DeleteBtn () { return this.cartItem3DeleteBtn().click() }
 
-  // Placer Order Actions
-  visiblePlaceOrderButton () { return this.placeOrderButton().should('be.visible') }
-  clickPlaceOrderButton () { return this.placeOrderButton().click() }
+  // Count elements on the cart
+  countItemsInCart() {
+    return this.allCartItems().its('length');
+  }
 
+  // Compare cart elements quantity
+  compareItemCount(expectedCount) {
+    this.countItemsInCart().should('eq', expectedCount);
+  }
+  // Placer Order Actions
+  visbilityPlaceOrderButton () { return this.placeOrderButton().should('be.visible') }
+  clickPlaceOrderButton () { return this.placeOrderButton().click() }
+  
   // Form Actions
-  writeInputName (name) { this.inputName().clear().type(name) }
-  writeInputCountry (country) { this.inputCountry().clear().type(country) }
+  writeInputName (name) { return this.inputName().clear().type(name) }
+  writeInputCountry (country) { return this.inputCountry().clear().type(country) }
   writeInputCity (city) { return this.inputCity().clear().type(city) }
   writeInputCard (card) { return this.inputCard().clear().type(card) }
   writeInputMonth (month) { return this.inputMonth().clear().type(month) }
@@ -93,6 +110,9 @@ class CartPage {
 
   // Confirm Actions
   clickConfirmButton () { return this.confirmButton().click() }
+  visbilityConfirmationMessage () { return this.confirmationMessage().should('be.visible') }
+  textConfirmationMessage () { return this.confirmationMessage().should('have.text', 'Thank you for your purchase!') }
+  visbilityConfirmationPurchaseInfo () { return this.confirmationPurchaseInfo().should('be.visible') }
 }
 
 const cartPage = new CartPage()

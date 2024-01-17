@@ -9,17 +9,18 @@ Feature: Test Navigation Header
   @regression
   Scenario Outline: Verify header links with modals
     When User clicks on the header link <link_name>
-    Then the correct modal and its elements should be displayed 
+    Then the correct modal for <link_name> and its elements should be displayed 
 
     Examples:
       | link_name    |
-      | Home         |
-      | Contact      |
-      | About Us     |
-      | Log in       |
-      | Sign up      |
+      | 'Home'       |
+      | 'Contact'    |
+      | 'About Us'   |
+      | 'Log In'     |
+      | 'Sign Up'    |
 
   @regression
   Scenario: Verify header link of cart page
     When User clicks on the Cart page link
-    Then the user is redirected to Cart page
+    Then the cart page is opened and its elements displayed
+    

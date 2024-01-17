@@ -4,10 +4,16 @@ const homePageLocators = {
   // Contact
   contactHeader: ':nth-child(2) > .nav-link',
   contactModal: '#exampleModal > .modal-dialog > .modal-content > .modal-header',
+  contactModalEmailLabel: '#exampleModal > .modal-dialog > .modal-content > .modal-body > form > :nth-child(1) > .form-control-label',
+  contactModalNameLabel: '#exampleModal > .modal-dialog > .modal-content > .modal-body > form > :nth-child(2) > .form-control-label',
+  contactModalMessageLabel: '#exampleModal > .modal-dialog > .modal-content > .modal-body > form > :nth-child(3) > .form-control-label',
+  contactModalCancelBtn: '#exampleModal > .modal-dialog > .modal-content > .modal-footer > .btn-secondary',
+  contactModalSendMessageBtn: '#exampleModal > .modal-dialog > .modal-content > .modal-footer > .btn-primary',
   // About Us
   aboutUsHeader: ':nth-child(3) > .nav-link',
   aboutUsModal: '#videoModal > .modal-dialog > .modal-content > .modal-header',
   aboutUsModalVideo: '.vjs-poster',
+  aboutUsModalCancelBtn: '#videoModal > .modal-dialog > .modal-content > .modal-footer > .btn-secondary',
   // Cart
   cartHeader: '#cartur',
   // Login
@@ -15,12 +21,15 @@ const homePageLocators = {
   logInModalLabel: '#logInModalLabel',
   usernameLabelLogIn: '#logInModal > .modal-dialog > .modal-content > .modal-body > form > :nth-child(1) > .form-control-label',
   passwordLabelLogIn: '#logInModal > .modal-dialog > .modal-content > .modal-body > form > :nth-child(2) > .form-control-label',
+  logInCloseBtn: '#logInModal > .modal-dialog > .modal-content > .modal-footer > .btn-secondary',
+  logInBtn: '#logInModal > .modal-dialog > .modal-content > .modal-footer > .btn-primary',
   // SignUp
   signUpHeader: '#signin2',
   signUpModalLabel: '#signInModalLabel',
   usernameLabelSignUp: '#signInModal > .modal-dialog > .modal-content > .modal-body > form > :nth-child(1) > .form-control-label',
   passwordLabelSignUp: '#signInModal > .modal-dialog > .modal-content > .modal-body > form > :nth-child(2) > .form-control-label',
-
+  signUpCloseBtn: '#signInModal > .modal-dialog > .modal-content > .modal-footer > .btn-secondary',
+  signUpBtn: '#signInModal > .modal-dialog > .modal-content > .modal-footer > .btn-primary',
   // Carousel 
   featuredItemCarousel: '.active > .d-block',
   prevItemCarousel: '.carousel-control-prev-icon',
@@ -38,15 +47,12 @@ const homePageLocators = {
 
   // Products
   phone1: ':nth-child(1) > .card > .card-block > .card-title > .hrefch',
-  phone1Image: ':nth-child(1) > .card > :nth-child(1) > .card-img-top',
   phone2: ':nth-child(2) > .card > .card-block > .card-title > .hrefch',
 
   laptop1: ':nth-child(1) > .card > .card-block > .card-title > .hrefch',
-  laptop1Image: ':nth-child(1) > .card > :nth-child(1) > .card-img-top',
   laptop2: ':nth-child(2) > .card > .card-block > .card-title > .hrefch',
 
   monitor1: ':nth-child(1) > .card > .card-block > .card-title > .hrefch',
-  monitor1Image: ':nth-child(1) > .card > :nth-child(1) > .card-img-top',
   monitor2: ':nth-child(2) > .card > .card-block > .card-title > .hrefch'  
 }
 
@@ -66,11 +72,17 @@ class HomePage {
   // Get Contact 
   contactHeader () { return cy.get(homePageLocators.contactHeader) }
   contactModal () { return cy.get(homePageLocators.contactModal) }
+  contactModalEmailLabel () { return cy.get(homePageLocators.contactModalEmailLabel) }
+  contactModalNameLabel () { return cy.get(homePageLocators.contactModalNameLabel) }
+  contactModalMessageLabel () { return cy.get(homePageLocators.contactModalMessageLabel) }
+  contactModalCancelBtn () { return cy.get(homePageLocators.contactModalCancelBtn) }
+  contactModalSendMessageBtn () { return cy.get(homePageLocators.contactModalSendMessageBtn) }
 
   // Get About Us
   aboutUsHeader () { return cy.get(homePageLocators.aboutUsHeader) }
   aboutUsModal () { return cy.get(homePageLocators.aboutUsModal) }
   aboutUsModalVideo () { return cy.get(homePageLocators.aboutUsModalVideo) }
+  aboutUsModalCancelBtn () { return cy.get(homePageLocators.aboutUsModalCancelBtn) }
 
   // Get Cart
   cartHeader () { return cy.get(homePageLocators.cartHeader) }
@@ -80,12 +92,16 @@ class HomePage {
   logInModalLabel () { return cy.get(homePageLocators.logInModalLabel) }
   usernameLabelLogIn () { return cy.get(homePageLocators.usernameLabelLogIn) }
   passwordLabelLogIn () { return cy.get(homePageLocators.passwordLabelLogIn) }
+  logInCloseBtn () { return cy.get(homePageLocators.logInCloseBtn) }
+  logInBtn () { return cy.get(homePageLocators.logInBtn) }
   
   // Get SignUp 
   signUpHeader () { return cy.get(homePageLocators.signUpHeader) }
   signUpModalLabel () { return cy.get(homePageLocators.signUpModalLabel) }
   usernameLabelSignUp () { return cy.get(homePageLocators.usernameLabelSignUp) }
   passwordLabelSignUp () { return cy.get(homePageLocators.passwordLabelSignUp) }
+  signUpCloseBtn () { return cy.get(homePageLocators.signUpCloseBtn) }
+  signUpBtn () { return cy.get(homePageLocators.signUpBtn) }
 
   // Get Carousel
   featuredItemCarousel () { return cy.get(homePageLocators.featuredItemCarousel) }
@@ -103,29 +119,35 @@ class HomePage {
 
   // Get Products
   phone1 () { return cy.get(homePageLocators.phone1) }
-  phone1Image () { return cy.get(pageLocators.phone1Image) }
   phone2 () { return cy.get(homePageLocators.phone2) }
 
   laptop1 () { return cy.get(homePageLocators.laptop1) }
   laptop2 () { return cy.get(homePageLocators.laptop2) }
-  laptop1Image () { return cy.get(homePageLocators.laptop1Image) }
 
   monitor1 () { return cy.get(homePageLocators.monitor1) }
-  monitor1Image () { return cy.get(homePageLocators.monitor1Image) }
+  monitor2 () { return cy.get(homePageLocators.monitor2) }
 
   // Header Actions
   clickHomeHeader () { return this.homeHeader().click() }
-  visibleCategoriesTitle () { return this.categoriesTitle().should('be.visible') }
 
   // Contact Actions
   clickContactHeader () { return this.contactHeader().click() }
-  visibleContactModal () { return this.contactModal().should('be.visible') }
+  visibilityContactModal () { return this.contactModal().should('be.visible') }
+  visibilityContactModalEmailLabel () { return this.contactModalEmailLabel().should('be.visible') }
+  textContactModalEmailLabel () { return this.contactModalEmailLabel().should('have.text', 'Contact Email:') }
+  visibilityContactModalNameLabel () { return this.contactModalNameLabel().should('be.visible') }
+  textContactModalNameLabel () { return this.contactModalNameLabel().should('have.text', 'Contact Name:') }
+  visibilityContactModalMessageLabel () { return this.contactModalMessageLabel().should('be.visible') }
+  textContactModalMessageLabel () { return this.contactModalMessageLabel().should('have.text', 'Message:') }
+  visibilityContactModalCancelBtn () { return this.contactModalCancelBtn().should('be.visible') }
+  visibilityContactModalSendMessageBtn () { return this.contactModalSendMessageBtn().should('be.visible') }
 
   // About Us Actions
   clickAboutUsHeader () { return this.aboutUsHeader().click() }
   visibilityAboutUsModal () { return this.aboutUsModal().should('be.visible') }
   visibilityAboutUsModalvideo () { return this.aboutUsModalVideo().should('be.visible') }
-
+  visibilityAboutUsModalCancelBtn () { return this.aboutUsModalCancelBtn().should('be.visible') }
+  
   // Cart Actions
   clickCartHeader () { return this.cartHeader().click() }
 
@@ -137,6 +159,8 @@ class HomePage {
   textUsernameTitleLogIn () { return this.usernameLabelLogIn().should('have.text', 'Username:') }
   visibilityPasswordTitleLogIn () { return this.passwordLabelLogIn().should('be.visible') }
   textPasswordTitleLogIn () { return this.passwordLabelLogIn().should('have.text', 'Password:') }
+  visibilityLogInCloseBtn () { return this.logInCloseBtn().should('be.visible') }
+  visibilityLogInBtn () { return this.logInBtn().should('be.visible') }
 
   // SignUp Actions
   clickSignUpHeader () { return this.signUpHeader().click() }
@@ -146,6 +170,8 @@ class HomePage {
   textUsernameTitleSignUp () { return this.usernameLabelSignUp().should('have.text', 'Username:') }
   visibilityPasswordTitleSignUp () { return this.passwordLabelSignUp().should('be.visible') }
   textPasswordTitleSignUp () { return this.passwordLabelSignUp().should('have.text', 'Password:') }
+  visibilitySignUpCloseBtn () { return this.signUpCloseBtn().should('be.visible') }
+  visibilitySignUpBtn () { return this.signUpBtn().should('be.visible') }
 
   // Carousel Actions
   visibilityFeaturedItemCarousel () { return this.featuredItemCarousel().should('be.visible') }
@@ -164,28 +190,32 @@ class HomePage {
   }
 
   // Categories Actions
+  visibilityCategoriesTitle () { return this.categoriesTitle().should('be.visible') }
   clickPhonesCategory () { return this.phonesCategory().click() }
+  visibilityPhonesCategory () { return this.phonesCategory().should('be.visible') }
   clickLaptopsCategory () { return this.laptopsCategory().click() }
+  visibilityLaptopsCategory () { return this.laptopsCategory().should('be.visible') }
   clickMonitorsCategory () { return this.monitorsCategory().click() }
-
+  visibilityMonitorsCategory () { return this.monitorsCategory().should('be.visible') }
 
   // Products Actions
   visibilityPhone1 () { return this.phone1().should('be.visible') }
   textPhone1 () { return this.phone1().should('have.text', 'Samsung galaxy s6') }
+  clickPhone1 () { return this.phone1().click() }
   visibilityPhone2 () { return this.phone2().should('be.visible') }
   textPhone2 () { return this.phone2().should('have.text', 'Nokia lumia 1520') }
 
   visibilityLaptop1 () { return this.laptop1().should('be.visible') }
   textLaptop1 () { return this.laptop1().should('have.text', 'Sony vaio i5') }
+  clickLaptop1 () { return this.laptop1().click() }
   visibilityLaptop2 () { return this.laptop2().should('be.visible') }
   textLaptop2 () { return this.laptop2().should('have.text', 'Sony vaio i7\n') }
 
   visibilityMonitor1 () { return this.monitor1().should('be.visible') }
-  textMonitorMonitor1 () { return this.monitor1().should('have.text', 'Apple monitor 24') }
-
-  clickPhone1Image () { return this.phone1Image().click() }
-  clickLaptop1Image () { return this.laptop1Image().click() }
-  clickMonitor1Image () { return this.monitor1Image().click() }
+  textMonitor1 () { return this.monitor1().should('have.text', 'Apple monitor 24') }
+  clickMonitor1 () { return this.monitor1().click() }
+  visibilityMonitor2 () { return this.monitor2().should('be.visible') }
+  textMonitor2 () { return this.monitor2().should('have.text', 'ASUS Full HD') }
 }
 
 const homePage = new HomePage();
