@@ -6,7 +6,7 @@ Feature: Test Shopping Cart Functionality
   Background:
     Given User navigates to Demoblaze Home Page
 
-  @sanity
+  @regression
   Scenario Outline: User can select a category and verify product presence
     When User selects a category <category>
     Then the products of the category <category> are displayed 

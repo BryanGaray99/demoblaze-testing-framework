@@ -21,6 +21,7 @@ module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   on('file:preprocessor', cucumber())
+  require('cypress-cucumber-tagging/src/plugin')(config)
   allureWriter(on, config)
   return config
 }
